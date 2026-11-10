@@ -25,7 +25,7 @@ export default function ProductCard({ product, index = 0 }) {
         <ProductMedia product={product} />
         <span className="pcard__tags">
           {product.badge && <span className="tag tag--dark">{product.badge}</span>}
-          <span className="tag tag--red">−{off}%</span>
+          {off > 0 && <span className="tag tag--red">−{off}%</span>}
         </span>
       </Link>
       <div className="pcard__body">
@@ -33,6 +33,7 @@ export default function ProductCard({ product, index = 0 }) {
         <h3 className="pcard__title">
           <Link href={`/product/${product.slug}`}>{product.name}</Link>
         </h3>
+        {product.specs?.Size && <p className="pcard__size">Size: {product.specs.Size}</p>}
         {product.rating ? (
           <p className="pcard__rating">
             <IconStar size={13} /> {product.rating}
@@ -42,7 +43,7 @@ export default function ProductCard({ product, index = 0 }) {
         <div className="pcard__foot">
           <p className="price">
             <strong>{formatINR(product.price)}</strong>
-            <s>{formatINR(product.mrp)}</s>
+            {product.mrp > product.price && <s>{formatINR(product.mrp)}</s>}
           </p>
           <button className="pcard__add" onClick={() => add(product.slug)} aria-label={`Add ${product.name} to cart`}>
             <IconPlus size={18} />

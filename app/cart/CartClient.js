@@ -108,7 +108,10 @@ Please send the payment link & design proof.`;
                 <div className="line__info">
                   <Link href={`/product/${l.slug}`} className="line__name">{l.product.name}</Link>
                   {l.note && <p className="line__note">Print: {l.note}</p>}
-                  <p className="price price--sm"><strong>{formatINR(l.product.price)}</strong><s>{formatINR(l.product.mrp)}</s></p>
+                  <p className="price price--sm">
+                    <strong>{formatINR(l.product.price)}</strong>
+                    {l.product.mrp > l.product.price && <s>{formatINR(l.product.mrp)}</s>}
+                  </p>
                   <div className="line__ctrl">
                     <div className="qty qty--sm">
                       <button onClick={() => setQty(l.key, l.qty - 1)} aria-label="Decrease"><IconMinus size={14} /></button>
@@ -163,7 +166,7 @@ Please send the payment link & design proof.`;
           <h2 className="h3">Order summary</h2>
           <dl>
             <div><dt>Subtotal</dt><dd>{formatINR(subtotal)}</dd></div>
-            <div className="good"><dt>You save</dt><dd>−{formatINR(mrpTotal - subtotal)}</dd></div>
+            {mrpTotal > subtotal && <div className="good"><dt>You save</dt><dd>−{formatINR(mrpTotal - subtotal)}</dd></div>}
             <div><dt>Shipping</dt><dd>{shipping ? formatINR(shipping) : 'Free'}</dd></div>
             <div className="summary__total"><dt>Total</dt><dd>{formatINR(total)}</dd></div>
           </dl>

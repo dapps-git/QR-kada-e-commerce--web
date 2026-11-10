@@ -20,17 +20,17 @@ export const site = {
     instagram: 'https://www.instagram.com/qr.kada',
   },
   // Partial COD: amount customer pays in advance, rest on delivery
-  advanceAmount: 299,
-  freeShippingAbove: 999,
-  shippingFee: 79,
+  advanceAmount: 399,
+  freeShippingAbove: 399,
+  shippingFee: 80,
 };
 
 export const announcements = [
   'Free design proof before printing',
-  `Pay just ₹299 now · rest on delivery`,
+  `Pay just ₹399 now · rest on delivery`,
   'Made in Kerala, shipped across India',
-  'Free shipping above ₹999',
-  'Works with every phone · QR + NFC',
+  'All Kerala Free Shipping',
+  'Works with every phone· QR + NFC'
 ];
 
 export const waLink = (text = '') =>

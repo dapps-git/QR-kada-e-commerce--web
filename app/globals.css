@@ -317,8 +317,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   min-height: 360px; padding: 24px; transition: transform .45s var(--ease), box-shadow .45s var(--ease);
 }
 .cat:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
-.cat__art { flex: 1; display: grid; place-items: center; margin: -10px -10px 0; }
+.cat__art { position: relative; flex: 1; min-height: 220px; display: grid; place-items: center; margin: -10px -10px 0; }
 .cat__art svg { width: 100%; max-height: 240px; }
+.cat__image { object-fit: contain; }
 .cat:hover .art-float { transform: translateY(-8px) rotate(-1.5deg); }
 .cat__text strong { display: block; font-family: var(--font-display); font-size: 22px; letter-spacing: -.02em; }
 .cat__text em { font-style: normal; color: #55545a; font-size: 14px; }
@@ -335,7 +336,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .section--tint .pcard { border-color: transparent; }
 .pcard:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .pcard__media { position: relative; aspect-ratio: 1; overflow: hidden; display: grid; place-items: center; }
-.media-img { object-fit: cover; transition: transform .8s var(--ease); }
+.media-img { object-fit: contain; transition: transform .8s var(--ease); }
 .media-art { width: 100%; height: 100%; }
 .pcard:hover .media-img { transform: scale(1.06); }
 .pcard:hover .art-float { transform: translateY(-10px) scale(1.03); }
@@ -344,6 +345,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .pcard__cat { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .pcard__title { font-family: var(--font-body); font-size: 15.5px; font-weight: 700; letter-spacing: -.01em; line-height: 1.35; margin-top: 6px; }
 .pcard__title a:hover { color: var(--red); }
+.pcard__size { margin-top: 5px; color: var(--muted); font-size: 12.5px; }
 .pcard__rating { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; margin-top: 6px; color: #b07a00; }
 .pcard__rating span { color: var(--muted); font-weight: 500; }
 .pcard__foot { margin-top: auto; padding-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }

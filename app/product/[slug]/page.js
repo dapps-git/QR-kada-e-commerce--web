@@ -51,7 +51,7 @@ export default async function ProductPage({ params }) {
       <section className="container pdp">
         <div className={`pdp__media theme-${p.art?.theme || 'noir'} reveal`}>
           <ProductMedia product={p} priority sizes="(max-width: 900px) 100vw, 50vw" />
-          <span className="tag tag--red pdp__off">Save {discount(p)}%</span>
+          {discount(p) > 0 && <span className="tag tag--red pdp__off">Save {discount(p)}%</span>}
         </div>
 
         <div className="pdp__info">
@@ -62,8 +62,12 @@ export default async function ProductPage({ params }) {
           ) : null}
           <p className="pdp__price">
             <strong>{formatINR(p.price)}</strong>
-            <s>{formatINR(p.mrp)}</s>
-            <span className="pdp__save">You save {formatINR(p.mrp - p.price)}</span>
+            {p.mrp > p.price && (
+              <>
+                <s>{formatINR(p.mrp)}</s>
+                <span className="pdp__save">You save {formatINR(p.mrp - p.price)}</span>
+              </>
+            )}
           </p>
           <p className="pdp__tax">Inclusive of all taxes · Pay {formatINR(site.advanceAmount)} now, rest on delivery</p>
           <p className="pdp__short">{p.short}</p>

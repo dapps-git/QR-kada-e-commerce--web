@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import ProductCard from '@/components/ProductCard';
-import StandArt from '@/components/StandArt';
 import { products, categories, professions, testimonials } from '@/data/products';
 import { site, waLink, formatINR } from '@/data/site';
 import {
@@ -20,10 +19,20 @@ const faqs = [
 ];
 
 const profIcons = { cafe: IconCup, salon: IconScissors, clinic: IconMedical, retail: IconStore, gym: IconDumbbell, hotel: IconBed };
+const collectionImages = {
+  'review-stands': { src: '/collections/review-stand.png', alt: 'Glossy QRkada NFC review stand' },
+  'payment-stands': { src: '/collections/payment-stand.png', alt: 'Colorful QR payment stand' },
+  'nfc-cards': { src: '/products/qrkada-business-card.png', alt: 'QRkada NFC business card' },
+  tags: { src: '/collections/review-stickers.png', alt: 'Google review QR sticker set' },
+};
 
 export default function Home() {
   const best = products.slice(0, 8);
-  const featured = categories.slice(0, 4).map((c) => ({ ...c, sample: products.find((p) => p.category === c.id && !p.image) || products.find((p) => p.category === c.id) }));
+  const featured = categories.slice(0, 4).map((c) => ({
+    ...c,
+    image: collectionImages[c.id],
+    sample: products.find((p) => p.category === c.id && !p.image) || products.find((p) => p.category === c.id),
+  }));
 
   return (
     <>
@@ -56,7 +65,7 @@ export default function Home() {
 
           <div className="hero__visual reveal" style={{ '--d': '120ms' }}>
             <div className="hero__frame">
-              <Image src="/images/stand-hero.jpg" alt="Qrkada black and red NFC review stand on a marble counter" fill priority sizes="(max-width: 900px) 90vw, 46vw" />
+              <Image src="/images/hero-stand-premium.png" alt="Premium black and red Qrkada NFC review stand with gold accents" fill priority sizes="(max-width: 900px) 90vw, 46vw" />
               <span className="ripple" aria-hidden="true"><i /><i /><i /></span>
             </div>
             <div className="float-card float-card--a">
@@ -69,7 +78,7 @@ export default function Home() {
             </div>
             <div className="hero__price">
               <span>From</span>
-              <strong>{formatINR(Math.min(...products.map((p) => p.price)))}</strong>
+              <strong>{formatINR(999)}</strong>
             </div>
           </div>
         </div>
@@ -79,9 +88,9 @@ export default function Home() {
       <section className="trust">
         <div className="container trust__row">
           {[
-            [IconBrush, 'Free design proof', 'Approve on WhatsApp first'],
+            [IconBrush, 'Full Time Support'],
             [IconWallet, 'Partial COD', `Just ${formatINR(site.advanceAmount)} to confirm`],
-            [IconTruck, 'Pan-India shipping', `Free above ${formatINR(site.freeShippingAbove)}`],
+            [IconTruck, 'All Kerala Free Shipping', `Free above ${formatINR(site.freeShippingAbove)}`],
             [IconShield, 'Re-programmable', 'Change links anytime'],
           ].map(([Icon, t, s], i) => (
             <div key={t} className="trust__item reveal" style={{ '--d': `${i * 70}ms` }}>
@@ -105,7 +114,9 @@ export default function Home() {
           <div className="cats">
             {featured.map((c, i) => (
               <Link key={c.id} href={`/shop?c=${c.id}`} className={`cat reveal theme-${c.sample?.art?.theme}`} style={{ '--d': `${i * 80}ms` }}>
-                <span className="cat__art"><StandArt art={c.sample?.art} id={'cat' + c.id} /></span>
+                <span className="cat__art">
+                  <Image src={c.image.src} alt={c.image.alt} fill sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw" className="cat__image" />
+                </span>
                 <span className="cat__text">
                   <strong>{c.name}</strong>
                   <em>{c.blurb}</em>
